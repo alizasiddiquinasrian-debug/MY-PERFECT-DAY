@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Perfect Day</title>
+    <meta
+      name="description"
+      content="A warm, human-focused landing page about a perfect day, built with HTML and CSS."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --bg-dark: #0d1726;
+        --panel: rgba(255, 255, 255, 0.76);
+        --panel-strong: #ffffff;
+        --line: rgba(15, 23, 42, 0.08);
+        --text: #122033;
+        --muted: #52657b;
+        --accent: #3a86ff;
+        --accent-soft: #dfeeff;
+        --accent-2: #7d5cff;
+        --shadow: 0 22px 60px rgba(17, 24, 39, 0.12);
+        --glow: 0 0 0 1px rgba(58, 134, 255, 0.08), 0 18px 40px rgba(58, 134, 255, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(58, 134, 255, 0.18), transparent 30%),
+          radial-gradient(circle at bottom right, rgba(125, 92, 255, 0.15), transparent 28%),
+          linear-gradient(180deg, #eef4ff 0%, #f8faff 100%);
+        color: var(--text);
+        min-height: 100vh;
+        line-height: 1.6;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .page-shell {
+        width: min(1180px, calc(100% - 32px));
+        margin: 28px auto 50px;
+        padding: 12px 18px 0;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 18px 22px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(15, 23, 42, 0.06);
+        border-radius: 20px;
+        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+        backdrop-filter: blur(12px);
+        position: sticky;
+        top: 12px;
+        z-index: 20;
+      }
+
+      .logo-wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .logo-mark {
+        width: 36px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        color: white;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        box-shadow: 0 12px 26px rgba(58, 134, 255, 0.28);
+      }
+
+      .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+      }
+
+      .main-nav a {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .nav-button,
+      .primary-btn,
+      .secondary-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.88rem 1.3rem;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+
+      .nav-button,
+      .primary-btn {
+        color: white;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        box-shadow: 0 16px 30px rgba(58, 134, 255, 0.2);
+      }
+
+      .secondary-btn {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+      }
+
+      .nav-button:hover,
+      .primary-btn:hover,
+      .secondary-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 32px rgba(58, 134, 255, 0.18);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        align-items: center;
+        gap: 42px;
+        padding: 72px 10px 30px;
+      }
+
+      .eyebrow {
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-size: 0.72rem;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(2.8rem, 5vw, 5rem);
+        line-height: 1.02;
+        letter-spacing: -0.06em;
+        margin-bottom: 18px;
+        max-width: 630px;
+        color: #111827;
+      }
+
+      .lead {
+        max-width: 560px;
+        font-size: 1.08rem;
+        line-height: 1.8;
+        color: var(--muted);
+        margin-bottom: 30px;
+      }
+
+      .hero-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 34px;
+      }
+
+      .mini-stats {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .mini-stats div {
+        min-width: 120px;
+        padding: 18px 16px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: var(--glow);
+      }
+
+      .mini-stats strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 1.15rem;
+      }
+
+      .mini-stats span {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .hero-visual {
+        display: flex;
+        justify-content: center;
+      }
+
+      .day-card {
+        width: min(100%, 510px);
+        background: linear-gradient(180deg, rgba(17, 25, 39, 0.96), rgba(17, 25, 39, 0.88));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 28px;
+        padding: 22px;
+        position: relative;
+        box-shadow: 0 30px 80px rgba(17, 24, 39, 0.18), 0 0 36px rgba(58, 134, 255, 0.14);
+      }
+
+      .day-card::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: 28px;
+        background: linear-gradient(135deg, rgba(58, 134, 255, 0.25), rgba(125, 92, 255, 0.12), transparent);
+        filter: blur(18px);
+        z-index: -1;
+      }
+
+      .card-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.8rem;
+        margin-bottom: 18px;
+      }
+
+      .status-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #52e2a5;
+        box-shadow: 0 0 14px rgba(82, 226, 165, 0.9);
+      }
+
+      .time-block {
+        padding: 18px 18px 14px;
+        border-radius: 18px;
+        margin-bottom: 13px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .time-block p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin-bottom: 10px;
+      }
+
+      .time-block h3 {
+        font-size: clamp(1.12rem, 2vw, 1.6rem);
+        line-height: 1.35;
+      }
+
+      .warm {
+        background: linear-gradient(135deg, rgba(250, 177, 90, 0.18), rgba(255, 240, 217, 0.04));
+      }
+
+      .cool {
+        background: linear-gradient(135deg, rgba(58, 134, 255, 0.16), rgba(125, 92, 255, 0.12));
+      }
+
+      .glow {
+        background: linear-gradient(135deg, rgba(90, 195, 158, 0.16), rgba(58, 134, 255, 0.08));
+      }
+
+      .feature-section,
+      .story-section,
+      .detail-section {
+        padding: 34px 10px 24px;
+      }
+
+      .section-heading {
+        margin-bottom: 28px;
+      }
+
+      .section-heading h2 {
+        font-size: clamp(2rem, 3vw, 3rem);
+        letter-spacing: -0.06em;
+        max-width: 680px;
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .info-card {
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(15, 23, 42, 0.06);
+        border-radius: 24px;
+        padding: 28px 22px;
+        box-shadow: 0 0 0 rgba(58, 134, 255, 0.0), 0 18px 35px rgba(15, 23, 42, 0.06);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      }
+
+      .info-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(58, 134, 255, 0.24);
+        box-shadow: 0 0 18px rgba(58, 134, 255, 0.22), 0 18px 45px rgba(58, 134, 255, 0.12);
+      }
+
+      .icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        font-size: 1.8rem;
+        background: linear-gradient(135deg, var(--accent-soft), rgba(125, 92, 255, 0.12));
+        border: 1px solid rgba(58, 134, 255, 0.1);
+        margin-bottom: 18px;
+      }
+
+      .info-card h3 {
+        font-size: 1.38rem;
+        margin-bottom: 12px;
+      }
+
+      .info-card p {
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .story-section {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        align-items: center;
+        gap: 26px;
+      }
+
+      .story-image {
+        display: flex;
+        justify-content: center;
+      }
+
+      .image-panel {
+        width: min(100%, 480px);
+        min-height: 420px;
+        border-radius: 28px;
+        position: relative;
+        overflow: hidden;
+        background:
+          linear-gradient(180deg, rgba(12, 30, 42, 0.12), rgba(12, 30, 42, 0.52)),
+          url('sunrise.png') center/cover no-repeat,
+          radial-gradient(circle at top, rgba(250, 177, 90, 0.8), transparent 26%),
+          linear-gradient(135deg, #d8efff, #8cc8f6 30%, #2d5a8a 70%, #1b2230);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 40px rgba(58, 134, 255, 0.12);
+      }
+
+      .image-panel::before,
+      .image-panel::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .image-panel::before {
+        width: 220px;
+        height: 220px;
+        right: 36px;
+        top: 42px;
+      }
+
+      .image-panel::after {
+        width: 180px;
+        height: 180px;
+        left: 48px;
+        bottom: 40px;
+      }
+
+      .image-panel span {
+        position: absolute;
+        left: 28px;
+        bottom: 22px;
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .story-copy h2 {
+        font-size: clamp(2rem, 3vw, 3.1rem);
+        line-height: 1.1;
+        letter-spacing: -0.06em;
+        margin-bottom: 18px;
+      }
+
+      .story-copy p {
+        color: var(--muted);
+        line-height: 1.9;
+        margin-bottom: 14px;
+      }
+
+      .text-link {
+        display: inline-block;
+        margin-top: 8px;
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 16px;
+        max-width: 920px;
+        margin: 0 auto;
+      }
+
+      .timeline-item {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 22px;
+        align-items: start;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 22px 24px;
+        box-shadow: var(--glow);
+      }
+
+      .time {
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      .timeline-item h3 {
+        margin-bottom: 8px;
+        font-size: 1.3rem;
+      }
+
+      .timeline-item p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .footer {
+        margin-top: 28px;
+        padding: 28px 18px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        border-top: 1px solid var(--line);
+      }
+
+      .footer h3 {
+        font-size: clamp(1.55rem, 2vw, 2.3rem);
+        letter-spacing: -0.05em;
+      }
+
+      @media (max-width: 900px) {
+        .hero,
+        .story-section,
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding-top: 54px;
+        }
+
+        .topbar {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .main-nav {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .footer {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .page-shell {
+          width: min(100% - 18px, 1180px);
+          margin-top: 18px;
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .topbar {
+          padding: 14px 16px;
+        }
+
+        .hero-copy h1 {
+          font-size: 2.7rem;
+        }
+
+        .timeline-item {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .nav-button,
+        .primary-btn,
+        .secondary-btn {
+          width: 100%;
+        }
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="logo-wrap">
+          <span>My Perfect Day</span>
+        </div>
+
+        <nav class="main-nav" aria-label="Main navigation">
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-copy">
+            <div>
+          <p>WE BOTH ARE WEB DEVELOPER CREATING OUR WONDERFUL WEBSITE ABOUT OURSELF ALIZA AND TEHREEM . OUR JOURNEY STARTS FROM VS CODE AND NOW WE ARE HERE PRESENTING OUR WEBSITE TOGETHER. WE ARE NOT AN EXPERT BUT STILL BUILD OUR WEBSITE PROFESSIONALY USING HTML AND CSS AND LITTLE BIT OF AI HELP.</p> <br> <br>
+          <p>WE ATE WAFFLES , WE ENJOYED CODIING , WE ENJOYED OUR TIME TOGHTHER , WE ENJOYED LEARNING SOMETHING NEW , OUR JOURNEY OF CODING BEGINS HERE</p> <br> <br>
+          <p>ALIZA IS A PRO CODER WHO LEARNED HTML WHEN SHE WAS IN 8th CLASS AND CSS WHEN SHE WAS IN 9th SHE IS 16 NOW. TEHREEM IS ALSO A CODER HER JOURNEY BEGINED ON SAYLANI OF VS CODE SHE LEARNED CODING HTML, CSS AND JAVASCRIPT THERE SHE IS STILL LEARNING JAVA SCRIPT PROPERLY BUT SHE IS MASTERED IN HTML AND CSS SHE IS 13 NOW.</p>
+          <p>alizasiddiqui.nasrian@gmail.com , itehreemfatima1@gmail.com</p>
+            </div>
+             <br> <br>
+            <p class="eyebrow">A gentle routine, a brighter life</p>
+            <h1>Make room for the moments that feel like home.</h1>
+            <p class="lead">
+              My perfect day is not about rushing. It is about 
+            </p>
+
+            <div class="hero-actions">
+              <a href="#moments" class="primary-btn">See the day</a>
+              <a href="#story" class="secondary-btn">Read the story</a>
+            </div>
+
+            <div class="mini-stats">
+              <div>
+                <strong>7:30</strong>
+                <span>Morning start</span>
+              </div>
+              <div>
+                <strong>3 hrs</strong>
+                <span>Focus time</span>
+              </div>
+              <div>
+                <strong>Sunset</strong>
+                <span>Golden hour</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="A preview of a perfect day">
+            <div class="day-card main-panel">
+              <div class="card-top">
+                <span class="status-dot"></span>
+                <span>Perfect Day</span>
+              </div>
+
+              <div class="time-block warm">
+                <p>Morning</p>
+                <h3>Slow coffee + fresh air</h3>
+              </div>
+
+              <div class="time-block cool">
+                <p>Afternoon</p>
+                <h3>Creative work + good music</h3>
+              </div>
+
+              <div class="time-block glow">
+                <p>Evening</p>
+                <h3>Good food + Good skills</h3>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="feature-section" id="moments">
+          <div class="section-heading">
+            <p class="eyebrow">What makes it perfect</p>
+            <h2>Small things that feel big.</h2>
+          </div>
+
+          <div class="card-grid">
+            <article class="info-card">
+              <div class="icon">☕</div>
+              <h3>Wake up gently</h3>
+              <p>
+                Start with a calm morning, no rush, and a little time for your
+                own thoughts before the world gets loud.
+              </p>
+            </article>
+
+            <article class="info-card">
+              <div class="icon">🌤️</div>
+              <h3>Let the light in</h3>
+              <p>
+                Open the curtains, step outside, and let fresh air reset your
+                energy before the day starts moving.
+              </p>
+            </article>
+
+            <article class="info-card">
+              <div class="icon">🎧</div>
+              <h3>Build momentum</h3>
+              <p>
+                Focus, create, and enjoy the kind of work that feels meaningful
+                instead of draining.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="story-section" id="story">
+          <div class="story-image">
+            <div class="image-panel">
+              <span>Sunrise</span>
+            </div>
+          </div>
+
+          <div class="story-copy">
+            <p class="eyebrow">The feeling behind it</p>
+            <h2>It is not about doing everything. It is about doing the right things well.</h2>
+            <p>
+              My Perfect Day
+              My perfect day would be full of fun, creativity, and happiness. Today, we are at Sunbeam creating a website and learning new skills. I enjoy designing the website, trying new ideas, and improving my work. After that, I would spend time with my family and friends, play games, read a fantasy book, or watch a great movie. For me, a perfect day is one where I learn something new, enjoy myself, and create something I am proud of.
+
+            </p>
+            <p>
+              That is why this kind of day feels so good. It makes room for both
+              productivity and joy without asking you to choose between them.
+            </p>
+            <a href="#contact" class="text-link">Create your own rhythm</a>
+          </div>
+        </section>
+
+        <section class="detail-section" id="details">
+          <div class="section-heading center">
+            <p class="eyebrow">A realistic routine</p>
+            <h2>A full day, creating and learning.</h2>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="time">7:00 AM</span>
+              <div>
+                <h3>Morning reset</h3>
+                <p>Stretch, hydrate, and take a quiet walk before the day begins.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <span class="time">11:30 AM</span>
+              <div>
+                <h3>Focused work</h3>
+                <p>Give your best energy to the tasks that matter most to you.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <span class="time">6:00 PM</span>
+              <div>
+                <h3>Evening unwind</h3>
+                <p>Eat well, rest deeply, and give yourself permission to slow down.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer" id="contact">
+        <div>
+          <p class="eyebrow">My perfect day</p>
+          <h3>Build a life that feels Wonderful.</h3>
+        </div>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=alizasiddiqui.nasrian@gmail.com" target="_blank" rel="noopener" class="nav-button">alizasiddiqui.nasrian@gmail.com</a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=itehreemfatima1@gmail.com" target="_blank" rel="noopener" class="nav-button">itehreemfatima1@gmail.com</a>
+      </footer>
+    </div>
+  </body>
+</html>
